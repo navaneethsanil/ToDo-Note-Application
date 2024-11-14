@@ -33,7 +33,6 @@
             {% elif task.status == "Pending" %}
             <p>Status: <span style="color: blue; font-weight: bold;">{{task.status}}</span></p>
             {% endif %}
-
             <a href="{% url 'update-task' task.id %}" class="btn btn-sm btn-primary">Update task</a>
             <a href="{% url 'delete-task' task.id %}" class="btn btn-sm btn-danger">Delete task</a>
         </div>

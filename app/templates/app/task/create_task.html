@@ -6,7 +6,8 @@
     <form method="POST">
         {% csrf_token %}
         {{form|crispy}}
-        <button class="btn btn-success mt-2">Add Task</button>
+        <button class="btn btn-success mt-4">Add Task</button>
+        <a href="{% url 'project-detail' project_id %}" class="btn btn-primary mt-4">Cancel</a>
     </form>
 </div>
 {% endblock content %}

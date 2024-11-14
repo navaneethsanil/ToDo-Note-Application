@@ -1,4 +1,6 @@
 from typing import Any
+from urllib import request
+from urllib.parse import urlparse
 from django.db.models.query import QuerySet
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect
@@ -10,7 +12,7 @@ from django.views.generic import (ListView,
                                   DeleteView)
 from . models import Task, Project
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.urls import reverse
+from django.urls import resolve, reverse
 from django.contrib import messages
 from . utils import export_all_projects_to_gist_and_local
 
@@ -101,6 +103,15 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         return reverse("project-detail", kwargs={"pk": self.object.project.pk})
+    
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        project_id = self.kwargs.get("pk")
+        # Add the project title to the context
+        context['project_id'] = project_id
+        
+        return context
 
 
 
@@ -119,8 +130,32 @@ class TaskUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         messages.success(self.request, "Task updated successfully!")
         return super().form_valid(form)
 
+
     def get_success_url(self):
         return reverse("project-detail", kwargs={"pk": self.object.project.pk})
+    
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        project_id = self.kwargs.get("pk")
+        context['project_id'] = project_id
+        
+        # Get the previous URL
+        previous_url = self.request.META.get('HTTP_REFERER')
+        
+        if previous_url:
+            # Parse the previous URL path
+            previous_path = urlparse(previous_url).path
+            
+            # Resolve the URL path to view name and extract pk if available
+            match = resolve(previous_path)
+            previous_pk = match.kwargs.get("pk")
+            
+            # Add the previous pk to the context if it exists
+            if previous_pk:
+                context['previous_project_id'] = previous_pk
+        
+        return context
     
 
 
@@ -144,12 +179,6 @@ class TaskDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def get_success_url(self):
         return reverse("project-detail", kwargs={"pk": self.object.project.pk})
     
-
-
-
-
-
-
 
 
 def export_to_gist(request, pk):
