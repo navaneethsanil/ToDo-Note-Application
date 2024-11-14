@@ -10,6 +10,9 @@
         <a href="{% url 'create-task' project_id %}" class="btn btn-dark">Add task</a>
     </div>
     {% else %}
+    <a href="{% url 'save-summary' project_id %}" class="btn btn-info"
+        style="margin-left: 300px; position: absolute; margin-top: -31px;">Export
+        Summary To Local File System</a>
     <a href="{% url 'export-to-gist' project_id %}" class="btn  btn-warning"
         style="margin-left: 600px; margin-top: -53px;">Export
         Summary To Gists</a>

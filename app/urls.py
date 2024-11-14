@@ -7,7 +7,8 @@ from . views import (HomeView,
                      DeleteProjectView,
                      TaskUpdateView,
                      TaskDeleteView,
-                     export_to_gist)
+                     export_to_gist,
+                     save_summary)
 
 urlpatterns = [
     path("", HomeView.as_view(template_name="app/home.html"), name="home"),
@@ -22,5 +23,6 @@ urlpatterns = [
     path("create-task/<int:pk>", TaskCreateView.as_view(template_name="app/task/create_task.html"), name="create-task"),
     path("update-task/<int:pk>", TaskUpdateView.as_view(template_name="app/task/update_task.html"), name="update-task"),
     path("delete-task/<int:pk>", TaskDeleteView.as_view(template_name="app/task/delete_task.html"), name="delete-task"),
-    path("export-to-gist/<int:pk>", export_to_gist, name="export-to-gist")
+    path("export-to-gist/<int:pk>", export_to_gist, name="export-to-gist"),
+    path("save-summary/<int:pk>", save_summary, name="save-summary")
 ]

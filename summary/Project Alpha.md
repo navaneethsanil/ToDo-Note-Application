@@ -1,9 +1,9 @@
 # Project Alpha
 
-**Summary:** 1/2 completed
+**Summary:** 2/2 completed
 
 ## Pending
-- [ ] Write project documentation
 
 ## Completed
 - [x] Set up project repository
+- [x] Write project documentation

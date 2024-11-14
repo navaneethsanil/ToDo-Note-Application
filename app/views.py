@@ -14,7 +14,7 @@ from . models import Task, Project
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import resolve, reverse
 from django.contrib import messages
-from . utils import export_all_projects_to_gist_and_local
+from . utils import export_all_projects_to_gist_and_local, export_all_projects_to_local
 
 class HomeView(LoginRequiredMixin, ListView):
     model = Project
@@ -184,5 +184,10 @@ class TaskDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 def export_to_gist(request, pk):
     gist_url = export_all_projects_to_gist_and_local(pk)
     messages.success(request, "Project summary has been successfully saved both locally and to GitHub Gist.")
+    return redirect(reverse("project-detail", kwargs={"pk": pk}))
+
+def save_summary(request, pk):
+    export_all_projects_to_local(pk)
+    messages.success(request, "Project summary has been successfully saved to your local file system")
     return redirect(reverse("project-detail", kwargs={"pk": pk}))
 

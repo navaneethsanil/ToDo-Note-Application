@@ -6,6 +6,33 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+def export_all_projects_to_local(pk):
+    # Loop through all Project instances
+    for project in Project.objects.filter(pk=pk):
+        # Filter tasks based on their status
+        completed_tasks = project.tasks.filter(status='Completed')
+        pending_tasks = project.tasks.filter(status='Pending')
+
+        # Generate markdown content
+        gist_content = f"# {project.title}\n\n"
+        gist_content += f"**Summary:** {completed_tasks.count()}/{project.tasks.count()} completed\n\n"
+        gist_content += "## Pending\n"
+        for task in pending_tasks:
+            gist_content += f"- [ ] {task.description}\n"
+        gist_content += "\n## Completed\n"
+        for task in completed_tasks:
+            gist_content += f"- [x] {task.description}\n"
+
+        # Save the gist content locally
+        local_filename = f"summary/{project.title}.md"
+        os.makedirs(os.path.dirname(local_filename), exist_ok=True)
+        with open(local_filename, 'w') as file:
+            file.write(gist_content)
+            
+    print(f"Local summary saved for {project.title} at {local_filename}")
+    return local_filename
+
+
 def export_all_projects_to_gist_and_local(pk):
     github_token = os.getenv('GITHUB_ACCESS_TOKEN')
     if not github_token:

@@ -29,8 +29,10 @@ pip install -r requirements.txt
 python manage.py makemigrations
 python manage.py migrate
 
-python manage.py createsuperuser
-export GITHUB_TOKEN='your_github_token_here'  # Use `set` on Windows
+python manage.py createsuperuser - NOTE: There is already an admin user exists in the database, with password: Testing@123
+
+# Gists setup
+export GITHUB_ACCESS_TOKEN='your_github_access_token_here'  # Use `set` on Windows
 
 python manage.py runserver
 ```
