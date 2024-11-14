@@ -34,6 +34,5 @@ export GITHUB_TOKEN='your_github_token_here'  # Use `set` on Windows
 
 python manage.py runserver
 ```
-
-
-
+Run unit tests to validate application functionality
+```python manage.py test```
