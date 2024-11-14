@@ -1,0 +1,12 @@
+{% extends 'app/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="project-form">
+    <h3 class="mb-4">Add your Project</h3>
+    <form method="POST">
+        {% csrf_token %}
+        {{form|crispy}}
+        <button class="btn btn-success mt-2">Create Project</button>
+    </form>
+</div>
+{% endblock content %}

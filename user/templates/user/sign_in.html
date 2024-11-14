@@ -1,0 +1,25 @@
+{% extends 'user/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="auth-form">
+    <form method="POST">
+        {% csrf_token %}
+        <h2 style="text-align: center;" class="mb-4">Sign In</h2>
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{message}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {{form|crispy}}
+        <div class="d-flex justify-content-center mt-4 mb-2">
+            <button class="btn btn-success">Sign In</button>
+        </div>
+        <div class="d-flex justify-content-center mt-4">
+            <p>Don't have an account? <a href="{% url 'sign_up' %}">Sign Up</a></p>
+        </div>
+    </form>
+</div>
+{% endblock content %}

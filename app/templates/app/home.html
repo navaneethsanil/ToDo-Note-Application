@@ -1,0 +1,29 @@
+{% extends 'app/base.html' %}
+{% block content %}
+<div class="task-list">
+    <h4 class="mb-4">Projects</h4>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>{{message}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% if projects.count == 0 %}
+    <div style="text-align: center; margin-top: 100px;">
+        <p>Currently you have no projects</p>
+        <a href="{% url 'create-project' %}" class="btn btn-dark">Add Project</a>
+    </div>
+    {% else %}
+    {% for project in projects %}
+    <div class="card mt-2 mb-3">
+        <div class="card-body">
+            <p class="card-text" style="font-weight: bold;">{{project.title}}</p>
+            <a href="{% url 'project-detail' project.id %}" class="btn btn-sm btn-primary">View Project</a>
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
+{% endblock content %}
