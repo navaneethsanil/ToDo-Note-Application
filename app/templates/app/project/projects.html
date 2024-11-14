@@ -27,7 +27,7 @@
     <div class="card mb-4">
         <div class="card-body">
             <p class="card-text" style="font-weight: bold;">{{task.description}}</p>
-            <p>Date Created: {{task.created_date}}</p>
+            <p>Date Created: {{ task.created_date|date:"F d Y" }}</p>
             {% if task.status == "Completed" %}
             <p>Status: <span style="color: green; font-weight: bold;">{{task.status}}</span></p>
             {% elif task.status == "Pending" %}
