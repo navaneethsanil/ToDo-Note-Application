@@ -16,7 +16,6 @@ A Django-based web application for managing to-dos within projects, with the cap
 
 ## Setup
 
-### 1. Clone the Repository
 ```bash
 git clone https://github.com/navaneethsanil/ToDo-Note-Application.git
 cd ToDo-Note-Application
