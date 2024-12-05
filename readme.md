@@ -28,9 +28,11 @@ pip install -r requirements.txt
 python manage.py makemigrations
 python manage.py migrate
 
+# You can skip this step if you don't want to create a new superuser
 python manage.py createsuperuser - NOTE: There is already an admin user exists in the database, with username: admin, and password: Testing@123
 
-# Gists setup
+
+# Gists setup (optional)
 export GITHUB_ACCESS_TOKEN='your_github_access_token_here'  # Use `set` on Windows
 
 python manage.py runserver

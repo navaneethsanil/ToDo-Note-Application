@@ -1,6 +1,6 @@
 # Project Alpha
 
-**Summary:** 2/2 completed
+**Summary:** 2/2 todos completed
 
 ## Pending
 

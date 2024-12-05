@@ -15,7 +15,7 @@ def export_all_projects_to_local(pk):
 
         # Generate markdown content
         gist_content = f"# {project.title}\n\n"
-        gist_content += f"**Summary:** {completed_tasks.count()}/{project.tasks.count()} completed\n\n"
+        gist_content += f"**Summary:** {completed_tasks.count()}/{project.tasks.count()} todos completed\n\n"
         gist_content += "## Pending\n"
         for task in pending_tasks:
             gist_content += f"- [ ] {task.description}\n"
