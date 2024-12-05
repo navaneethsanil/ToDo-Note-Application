@@ -7,7 +7,7 @@
     {% if tasks.count == 0 %}
     <div style="text-align: center; margin-top: 100px;">
         <p>Currently you have no tasks associated with {{project_title}}</p>
-        <a href="{% url 'create-task' project_id %}" class="btn btn-dark">Add task</a>
+        <a href="{% url 'create-task' project_id %}" class="btn btn-dark"><i class="fa-solid fa-plus me-2"></i>Add task</a>
     </div>
     {% else %}
     <a href="{% url 'save-summary' project_id %}" class="btn btn-success"
